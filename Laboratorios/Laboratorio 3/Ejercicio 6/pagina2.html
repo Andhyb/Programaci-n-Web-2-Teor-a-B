@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Operaciones Dinámicas</title>
+    <script src="pagina2.js" defer></script>
+</head>
+<body>
+    <h1>Calculadora de Operaciones Dinámicas</h1>
+
+    <label for="valorUno">Primer operando:</label>
+    <input type="number" id="valorUno"><br><br>
+
+    <label for="valorDos">Segundo operando:</label>
+    <input type="number" id="valorDos"><br><br>
+
+    <label for="operadorElegido">Operador:</label>
+    <select id="operadorElegido">
+        <option value="+">Suma (+)</option>
+        <option value="-">Resta (-)</option>
+        <option value="*">Multiplicación (*)</option>
+        <option value="/">División (/)</option>
+        <option value="%">Módulo (%)</option>
+        <option value="&&">AND lógico (&&)</option>
+        <option value="||">OR lógico (||)</option>
+        <option value="&">AND bit a bit (&)</option>
+        <option value="|">OR bit a bit (|)</option>
+        <option value="^">XOR bit a bit (^)</option>
+    </select><br><br>
+
+    <button onclick="realizarOperacion()">Calcular</button>
+
+    <h2 id="resultadoFinal">Resultado: </h2>
+</body>
+</html>
