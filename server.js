@@ -25,7 +25,7 @@ app.get('/confirmados-por-region', (req, res) => {
     const resultado = {};
     json.forEach(entry => {
       const region = entry.region;
-      const confirmados = parseInt(entry.confirmados);
+      const confirmados = parseInt(entry.confirmados) || 0;
       if (!resultado[region]) {
         resultado[region] = 0;
       }
