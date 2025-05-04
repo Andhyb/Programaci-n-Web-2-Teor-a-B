@@ -20,16 +20,20 @@ app.get('/confirmados-por-region', (req, res) => {
   const dataPath = path.join(__dirname, 'data.json');
   fs.readFile(dataPath, 'utf8', (err, data) => {
     if (err) return res.status(500).send('Error al leer el archivo');
+    
     const json = JSON.parse(data);
-
     const resultado = {};
+
     json.forEach(entry => {
       const region = entry.region;
-      const confirmados = parseInt(entry.confirmed) || 0;
-      if (!resultado[region]) {
-        resultado[region] = 0;
-      }
-      resultado[region] += confirmados;
+      const confirmadosArray = entry.confirmed || [];
+      let total = 0;
+
+      confirmadosArray.forEach(dato => {
+        total += parseInt(dato.value) || 0;
+      });
+
+      resultado[region] = total;
     });
 
     res.json(resultado);
