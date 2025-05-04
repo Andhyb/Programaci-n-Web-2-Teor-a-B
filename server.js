@@ -16,6 +16,26 @@ app.get('/regiones', (req, res) => {
   });
 });
 
+app.get('/confirmados-por-region', (req, res) => {
+  const dataPath = path.join(__dirname, 'data.json');
+  fs.readFile(dataPath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error al leer el archivo');
+    const json = JSON.parse(data);
+
+    const resultado = {};
+    json.forEach(entry => {
+      const region = entry.region;
+      const confirmados = parseInt(entry.confirmados);
+      if (!resultado[region]) {
+        resultado[region] = 0;
+      }
+      resultado[region] += confirmados;
+    });
+
+    res.json(resultado);
+  });
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
