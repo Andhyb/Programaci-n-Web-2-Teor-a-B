@@ -79,6 +79,27 @@ app.get('/comparar-regiones', (req, res) => {
   });
 });
 
+app.use(express.json());
+
+app.post('/comparar-regiones-seleccionadas', (req, res) => {
+  const dataPath = path.join(__dirname, 'data.json');
+  const seleccionadas = req.body.regiones;
+
+  fs.readFile(dataPath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error al leer el archivo');
+
+    const json = JSON.parse(data);
+    const fechas = json.find(r => r.region === seleccionadas[0]).confirmed.map(d => d.date);
+
+    const valores = {};
+    seleccionadas.forEach(region => {
+      const regionData = json.find(r => r.region === region);
+      valores[region] = regionData.confirmed.map(d => parseInt(d.value) || 0);
+    });
+
+    res.json({ fechas, regiones: seleccionadas, valores });
+  });
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
