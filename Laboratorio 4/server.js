@@ -59,6 +59,26 @@ app.get('/datos-arequipa', (req, res) => {
   });
 });
 
+app.get('/comparar-regiones', (req, res) => {
+  const dataPath = path.join(__dirname, 'data.json');
+  fs.readFile(dataPath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error al leer el archivo');
+
+    const json = JSON.parse(data);
+    const regionesSeleccionadas = ['Lima', 'Arequipa', 'Piura'];
+
+    const fechas = json.find(r => r.region === 'Lima').confirmed.map(d => d.date);
+
+    const valores = {};
+    regionesSeleccionadas.forEach(region => {
+      const regionData = json.find(r => r.region === region);
+      valores[region] = regionData.confirmed.map(d => parseInt(d.value) || 0);
+    });
+
+    res.json({ fechas, regiones: regionesSeleccionadas, valores });
+  });
+});
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
