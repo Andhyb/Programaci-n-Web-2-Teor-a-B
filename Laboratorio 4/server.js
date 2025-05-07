@@ -101,6 +101,39 @@ app.post('/comparar-regiones-seleccionadas', (req, res) => {
   });
 });
 
+app.get('/comparar-diario-sin-lima-callao', (req, res) => {
+  const dataPath = path.join(__dirname, 'data.json');
+  fs.readFile(dataPath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error al leer el archivo');
+
+    const json = JSON.parse(data);
+
+    // Excluir Lima y Callao
+    const regionesFiltradas = json
+      .filter(r => r.region !== 'Lima' && r.region !== 'Callao')
+      .map(r => r.region);
+
+    const fechas = json.find(r => r.region === 'Ancash').confirmed.map(d => d.date);
+
+    const valores = {};
+    regionesFiltradas.forEach(region => {
+      const regionData = json.find(r => r.region === region);
+      const acumulados = regionData.confirmed.map(d => parseInt(d.value) || 0);
+
+      // Calculamos diferencia diaria: día actual - día anterior
+      const diarios = acumulados.map((val, i) => {
+        if (i === 0) return 0;
+        return Math.max(0, val - acumulados[i - 1]); // evita negativos por errores
+      });
+
+      valores[region] = diarios;
+    });
+
+    res.json({ fechas, regiones: regionesFiltradas, valores });
+  });
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
