@@ -9,6 +9,9 @@ black_knight = white_knight.negative()
 fila1 = white_knight.join(black_knight)
 fila2 = black_knight.join(white_knight)
 
+# Unir filas en vertical
+combinado = fila1.up(fila2)
+
 # Aplicar espejo horizontal (para ejercicio b)
 resultado = combinado.horizontalMirror()
 

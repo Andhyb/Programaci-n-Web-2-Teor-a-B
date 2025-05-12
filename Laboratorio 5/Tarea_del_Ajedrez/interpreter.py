@@ -2,10 +2,12 @@ import pygame, sys
 from pygame.locals import *
 from .colors import *
 
+SCALE = 4
+
 def parseLine(DISPLAY, y, s):
   x = 0
   for c in s:
-    pygame.draw.line(DISPLAY, color[c], (x, y), (x, y))
+    pygame.draw.rect(DISPLAY, color[c], (x*SCALE, y*SCALE, SCALE, SCALE))
     x += 1
 
 def draw(picture):
@@ -15,16 +17,17 @@ def draw(picture):
     img = picture
   pygame.init()
 
-  DISPLAY=pygame.display.set_mode((640, 480))
+  ancho = len(img[0]) * SCALE
+  alto = len(img) * SCALE
+  DISPLAY = pygame.display.set_mode((ancho, alto))
   DISPLAY.fill(BLUE)
 
-  n = len(img)
-  for i in range(0, n):
+  for i in range(len(img)):
     parseLine(DISPLAY, i, img[i])
 
   while True:
     for event in pygame.event.get():
       if event.type==QUIT:
         pygame.quit()
-        #sys.exit()
+        return
     pygame.display.update()
