@@ -10,7 +10,7 @@ fila1 = white_knight.join(black_knight)
 fila2 = black_knight.join(white_knight)
 
 # Unir las dos filas verticalmente
-resultado = fila1.up(fila2)
+resultado = fila2.up(fila1)
 
 # Mostrar la imagen resultante
 interpreter.draw(resultado)
