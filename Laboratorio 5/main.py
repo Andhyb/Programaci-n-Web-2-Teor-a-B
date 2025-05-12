@@ -7,13 +7,11 @@ black_knight = white_knight.negative()
 
 # Construir las dos filas
 fila1 = white_knight.join(black_knight)
-fila2 = black_knight.join(white_knight)
+fila2 = white_knight.verticalMirror().join(black_knight.verticalMirror())
 
-# Unir filas en vertical
-combinado = fila1.up(fila2)
+# Unir arriba y abajo
+resultado = fila2.up(fila1)
 
-# Aplicar espejo horizontal (para ejercicio b)
-resultado = combinado.horizontalMirror()
 
 # Mostrar la imagen resultante
 interpreter.draw(resultado)
