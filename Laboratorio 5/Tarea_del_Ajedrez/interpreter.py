@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from .colors import *
 
-SCALE = 3
+SCALE = 2
 
 def parseLine(DISPLAY, y, s):
   x = 0
