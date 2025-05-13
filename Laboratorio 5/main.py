@@ -1,10 +1,12 @@
 from Tarea_del_Ajedrez import chessPictures, interpreter
 
-# Obtenemos la reina blanca
-queen = chessPictures.queen
+white = chessPictures.square
+black = white.negative()
 
-# La repetimos 4 veces
-resultado = queen.horizontalRepeat(4)
+# construimos el patron blanco-negro
+patron = white.join(black)
+# hacemos que se repita 4 veces
+resultado = patron.horizontalRepeat(4)
 
 # Mostramos la imagen
 interpreter.draw(resultado)
