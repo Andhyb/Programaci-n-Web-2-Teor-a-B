@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.shortcuts import render
+from .models import DestinoTuristico
+
+def lista_destinos(request):
+    destinos = DestinoTuristico.objects.all()
+    return render(request, 'destinos/lista_destinos.html', {'destinos': destinos})
