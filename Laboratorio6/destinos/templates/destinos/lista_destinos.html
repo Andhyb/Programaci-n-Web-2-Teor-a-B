@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destinos Turísticos</title>
+</head>
+<body>
+    <h1>Lista de Destinos</h1>
+
+    {% for destino in destinos %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
+            <h2>{{ destino.nombreCiudad }}</h2>
+            <p>{{ destino.descripcionCiudad }}</p>
+            <p><strong>Precio:</strong> ${{ destino.precioTour }}</p>
+
+            {% if destino.ofertaTour %}
+                <p style="color: red;"><strong>¡En oferta!</strong></p>
+            {% endif %}
+
+            {% if destino.imagenCiudad %}
+                <img src="{{ destino.imagenCiudad.url }}" width="300">
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No hay destinos registrados aún.</p>
+    {% endfor %}
+</body>
+</html>
