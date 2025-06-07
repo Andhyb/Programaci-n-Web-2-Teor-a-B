@@ -29,3 +29,10 @@ def editar_destino(request, destino_id):
     else:
         form = DestinoForm(instance=destino)
     return render(request, 'destinos/editar_destino.html', {'form': form})
+
+def eliminar_destino(request, destino_id):
+    destino = get_object_or_404(DestinoTuristico, id=destino_id)
+    if request.method == 'POST':
+        destino.delete()
+        return redirect('lista_destinos')
+    return render(request, 'destinos/eliminar_destino.html', {'destino': destino})
