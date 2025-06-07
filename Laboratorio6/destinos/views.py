@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import login
+from .forms import RegistroUsuarioForm
 
 from django.shortcuts import render
 from .models import DestinoTuristico
@@ -36,3 +38,14 @@ def eliminar_destino(request, destino_id):
         destino.delete()
         return redirect('lista_destinos')
     return render(request, 'destinos/eliminar_destino.html', {'destino': destino})
+
+def registro(request):
+    if request.method == 'POST':
+        form = RegistroUsuarioForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            login(request, usuario)  # inicia sesión automáticamente
+            return redirect('lista_destinos')
+    else:
+        form = RegistroUsuarioForm()
+    return render(request, 'destinos/registro.html', {'form': form})
