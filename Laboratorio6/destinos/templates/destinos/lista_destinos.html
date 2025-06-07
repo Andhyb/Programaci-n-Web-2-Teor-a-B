@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Destinos Turísticos</title>
 </head>
 <body>
     <h1>Lista de Destinos</h1>
+
+    <a href="{% url 'agregar_destino' %}">➕ Añadir nuevo destino</a>
+    <hr>
 
     {% for destino in destinos %}
         <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
@@ -17,11 +21,17 @@
             {% endif %}
 
             {% if destino.imagenCiudad %}
-                <img src="{{ destino.imagenCiudad.url }}" width="300">
+                <img src="{{ destino.imagenCiudad.url }}" width="300" alt="Imagen de {{ destino.nombreCiudad }}">
             {% endif %}
+
+            <p>
+                <a href="{% url 'editar_destino' destino.id %}">✏️ Editar</a> |
+                <a href="{% url 'eliminar_destino' destino.id %}">🗑️ Eliminar</a>
+            </p>
         </div>
     {% empty %}
         <p>No hay destinos registrados aún.</p>
     {% endfor %}
 </body>
 </html>
+
