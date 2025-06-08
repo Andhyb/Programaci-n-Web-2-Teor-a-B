@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Destinos Turísticos{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'lista_destinos' %}">Explora Perú</a></h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Hola, {{ user.username }}</li>
+                    <li><a href="{% url 'agregar_destino' %}">Añadir destino</a></li>
+                    <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                    <li><a href="{% url 'registro' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Destinos Turísticos. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
