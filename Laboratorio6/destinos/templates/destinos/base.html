@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Destinos Turísticos{% endblock %}</title>
@@ -7,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1><a href="{% url 'lista_destinos' %}">Explora Perú</a></h1>
+        <h1><a href="{% url 'lista_destinos' %}">Explora el mundo</a></h1>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
@@ -32,3 +33,4 @@
     </footer>
 </body>
 </html>
+
