@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla y Suma</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: center;
+    }
+    table {
+      margin-top: 20px;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #337ab7;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Crear tabla de valores al azar</h2>
+
+  <form id="formCantidad">
+    <label for="cantidad">¿Cuántos valores desea?</label>
+    <input type="number" id="cantidad" min="1" required>
+    <button type="submit">Crear Tabla</button>
+  </form>
+
+  <div id="tablaContenedor"></div>
+
+  <div id="resultado"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
